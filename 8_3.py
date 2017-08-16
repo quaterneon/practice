@@ -78,6 +78,7 @@ def binary_search(input_):
             return []
 
         mid = math.floor((min_ + max_)/2)
+
         if input_[mid] == mid:
             return mid
 
