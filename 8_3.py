@@ -2,6 +2,7 @@
 CCI 8.3 Magic index
 """
 import random
+import math
 
 
 def random_list(min_: int, max_: int, length: int):
@@ -61,3 +62,32 @@ def less_naive(input_):
 print("LESS NAIVE")
 for case in test_cases:
     print("{}: {}".format(case, less_naive(case)))
+
+
+# If we reduce the problem to just returning one possible magic index, then we can do a binary search
+
+def binary_search(input_):
+    """
+    Complexity: O(log(n))
+    :param input_:
+    :return:
+    """
+
+    def eval_ind(min_, max_):
+        if min_ == max_:
+            return []
+
+        mid = math.floor((min_ + max_)/2)
+        if input_[mid] == mid:
+            return mid
+
+        if input_[mid] < mid:
+            return eval_ind(mid+1, max_)
+
+        return eval_ind(min_, mid)
+
+    return eval_ind(0, len(input_))
+
+print("BINARY SEARCH")
+for case in test_cases:
+    print("{}: {}".format(case, binary_search(case)))
