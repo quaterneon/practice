@@ -42,3 +42,21 @@ def still_naive(case):
     """
     chars = set(case)
 
+    def permute(subcase):
+        if not subcase:
+            return ['']
+
+        out_perms = []
+
+        for char in subcase:
+            sub = set(subcase)
+            sub.remove(char)
+            perms = permute(sub)
+            out_perms.extend([char + perm for perm in perms])
+
+        return out_perms
+
+    return permute(chars)
+
+for case in test_cases:
+    print("{}: {}".format(case, still_naive(case)))
